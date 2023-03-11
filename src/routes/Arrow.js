@@ -1,6 +1,7 @@
 import DrawCanvas from '../component/DrawCanvas'
 import Canvashandler from '../utils/Canvahandler';
 import Circle from '../utils/Circle';
+import '../stylsheet/arrow.css'
 
 const Arrow = () => {
     let nbTouch = 0;
@@ -12,7 +13,6 @@ const Arrow = () => {
 
     //initializing 
     function printCircles() {
-        console.log('coucou', canvaObj)
         for (let i = 0; i < nbCible; i++) {
             let c = new Circle({ ctx: canvaObj.ctx, cnvW: canvaObj.canvas.width, cnvH: canvaObj.canvas.height });
             c.setRandomPosition();
@@ -23,7 +23,6 @@ const Arrow = () => {
 
     // //start new game
     function newGame() {
-
         if (canvaObj.drawL.length)
             return
         nbTouch = 0;
@@ -34,14 +33,14 @@ const Arrow = () => {
 
     // //onclick do that
     function clickObject(event) {
+
         event.stopPropagation()
         if (!click) {
             startTime = Date.now();
         }
         click++;
-        nbTouch += canvaObj.deletClickedObject({ x: event.offsetX, y: event.offsetY })
+        nbTouch += canvaObj.deletClickedObject({ x: event.nativeEvent.offsetX, y: event.nativeEvent.offsetY })
         canvaObj.print();
-        console.log(nbTouch)
         if (canvaObj.drawL.length == 0) {
             const totalTime = Date.now() - startTime
             document.getElementById('result').textContent = totalTime / 1000
@@ -51,30 +50,24 @@ const Arrow = () => {
     // document.getElementById('resetButton').addEventListener('click', resetGame, false);
 
 
-    function resetGame(event) {
-        event.stopPropagation()
+    function resetGame() {
         newGame();
     }
     //
 
     function setCanva(canvas, ctx) {
-        console.log('yo')
         canvaObj = new Canvashandler(canvas, ctx)
-        console.log(canvaObj)
-
-
         newGame();
     }
 
     return (
         <div>
             <div id='canvadiv'>
-                <DrawCanvas setCanva={setCanva} />
+                <DrawCanvas setCanva={setCanva} onClick={clickObject} />
             </div>
             <div className="option">
                 <input onClick={resetGame} type="button" value='reset' className='greenButton' id="resetButton" />
             </div>
-            <button onClick={() => console.log(canvaObj)} >asdasdasdasdasd</button>
             <div id='result'>
             </div>
         </div>

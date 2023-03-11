@@ -14,7 +14,6 @@ export default class Canvashandler {
     }
 
     print() {
-        console.log('s')
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawL.forEach(el => el.draw())
     }
