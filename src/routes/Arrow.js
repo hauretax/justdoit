@@ -10,7 +10,7 @@ const Arrow = () => {
     const [scores, setScores] = useState(getLocal('scores'));
     let nbTouch = 0;
     let click = 0;
-    let nbCible = 2;
+    let nbCible = 50;
     let startTime;
     let canvaObj = null;
 
@@ -53,7 +53,7 @@ const Arrow = () => {
 
             const newScore = { time: totalTime / 1000, date: Date.now() }
             addLocal('scores', newScore)
-            setScores(scores.push(newScore))
+            setScores([...scores, newScore])
         }
     }
 
@@ -68,6 +68,7 @@ const Arrow = () => {
 
     return (
         <div>
+
             <div id='canvadiv'>
                 <DrawCanvas setCanva={setCanva} onClick={clickObject} />
             </div>
