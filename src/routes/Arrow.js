@@ -53,7 +53,11 @@ const Arrow = () => {
 
             const newScore = { time: totalTime / 1000, date: Date.now() }
             addLocal('scores', newScore)
-            setScores([...scores, newScore])
+            if (scores)
+                setScores([...scores, newScore])
+            else
+                setScores([newScore])
+            console.log(scores)
         }
     }
 
