@@ -2,15 +2,21 @@ import DrawCanvas from '../component/DrawCanvas'
 import Canvashandler from '../utils/Canvahandler';
 import Circle from '../utils/Circle';
 import '../stylsheet/arrow.css'
+import Showscores from '../component/Showscores';
+import { addLocal, getLocal } from '../utils/handleLocalStorage.ts';
+import React, { useState } from 'react';
 
 const Arrow = () => {
+    const [scores, setScores] = useState(getLocal('scores'));
     let nbTouch = 0;
     let click = 0;
-    let nbCible = 50;
+    let nbCible = 2;
     let startTime;
     let canvaObj = null;
 
 
+    //a retirer quand nbTouche seras utiliser pour la precision notament
+    void nbTouch
     //initializing 
     function printCircles() {
         for (let i = 0; i < nbCible; i++) {
@@ -41,19 +47,19 @@ const Arrow = () => {
         click++;
         nbTouch += canvaObj.deletClickedObject({ x: event.nativeEvent.offsetX, y: event.nativeEvent.offsetY })
         canvaObj.print();
-        if (canvaObj.drawL.length == 0) {
+        if (canvaObj.drawL.length === 0) {
             const totalTime = Date.now() - startTime
             document.getElementById('result').textContent = totalTime / 1000
+
+            const newScore = { time: totalTime / 1000, date: Date.now() }
+            addLocal('scores', newScore)
+            setScores(scores.push(newScore))
         }
     }
-    // canvaObj.canvas.addEventListener('click', clickObject, false);
-    // document.getElementById('resetButton').addEventListener('click', resetGame, false);
-
 
     function resetGame() {
         newGame();
     }
-    //
 
     function setCanva(canvas, ctx) {
         canvaObj = new Canvashandler(canvas, ctx)
@@ -69,6 +75,9 @@ const Arrow = () => {
                 <input onClick={resetGame} type="button" value='reset' className='greenButton' id="resetButton" />
             </div>
             <div id='result'>
+            </div>
+            <div>
+                <Showscores scores={scores} />
             </div>
         </div>
     )
