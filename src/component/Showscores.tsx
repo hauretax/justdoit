@@ -22,6 +22,8 @@ type key2 = 'time'
 
 
 export default function ShowScores({ scores }: AppProps): JSX.Element {
+  if (!scores)
+    return (<></>)
   return (
     <>
       <Line data={arrayObjectToData(scores, 'date', 'time')} />
