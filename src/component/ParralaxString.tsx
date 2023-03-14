@@ -1,5 +1,5 @@
 import '../stylsheet/parallaxstring.css'
-import React, { Component, RefObject } from 'react';
+import React, { RefObject } from 'react';
 
 
 type AppProps = {
@@ -14,8 +14,9 @@ interface MyState {
 
 function updateParallax(refs: RefObject<HTMLInputElement>[], x: number, y: number) {
     // Loop through each target element
+
     refs.forEach(el => {
-        // Get the target's speed
+        //     // Get the target's speed
         let target = el.current
         const speed = parseFloat(target?.dataset.speed || "0");
 
@@ -31,38 +32,49 @@ export default class ParralaxString extends React.Component<AppProps, MyState> {
     constructor(props: AppProps) {
         super(props);
         this.state = {
-            inputRefs: [
-                React.createRef<HTMLInputElement>(),
-                React.createRef<HTMLInputElement>(),
-                React.createRef<HTMLInputElement>(),
-                React.createRef<HTMLInputElement>()
-            ]
+            inputRefs: []
         };
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps: AppProps) {
+        if (prevProps.text !== this.props.text) {
+            const textArr = this.props.text.split('');
+            const refsArr = Array.from({ length: textArr.length }, () => React.createRef<HTMLInputElement>());
+            this.setState({ inputRefs: refsArr });
+        }
         // Restart the animation loop when the component updates
         updateParallax(this.state.inputRefs, this.props.x, this.props.y);
     }
 
+    componentDidMount() {
+        const textArr = this.props.text.split('');
+        const refsArr = Array.from({ length: textArr.length }, () => React.createRef<HTMLInputElement>());
+        this.setState({ inputRefs: refsArr });
+    }
+
+
     render() {
         const { inputRefs } = this.state;
-        const { text, x, y } = this.props;
+        let { text } = this.props;
+
+        let textarr = text.split('')
         return (
             <div className='ParralaxString'>
                 <div>{text}</div>
-                <div ref={inputRefs[0]} className="parallax parallax--one" data-speed="0.45"></div>
-                <div ref={inputRefs[1]} className="parallax parallax--two" data-speed="0.5"></div>
-                <div ref={inputRefs[2]} className="parallax parallax--three" data-speed="0.55"></div>
-                <div ref={inputRefs[3]} className="parallax parallax--four" data-speed="0.6"></div>
-
-                <div className="mouseArea" >
-                    Hook
-                    <div className="mouseInfo">
-                        The current mouse position is ({x}, {y})
-                    </div>
+                <div>
+                    {textarr.map((el, index) => {
+                        let eltoprint =
+                            <span
+                                key={index}
+                                ref={inputRefs[index]}
+                                className="parallax"
+                                data-speed={Math.random()} >
+                                {el}
+                            </span>
+                        return eltoprint
+                    })}
                 </div>
             </div>
         )
     }
-}
+}               

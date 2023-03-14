@@ -23,7 +23,7 @@ export default function LetterShow() {
 
     return (
         <div id='lettershow' onMouseMove={handleMouseMove}>
-            <ParralaxString text='aaaa' x={x} y={y} />
+            <ParralaxString text='1234' x={x} y={y} />
         </div>
     )
 }

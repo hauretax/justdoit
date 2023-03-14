@@ -3,7 +3,7 @@
 }
 
 .parallax--one {
-    top: 0;
+    top: 38%;
     left: 40%;
     width: 10vmax;
     height: 15vmax;
@@ -11,7 +11,7 @@
 }
 
 .parallax--two {
-    top: 10%;
+    top: 40%;
     left: 45%;
     width: 20vmax;
     height: 10vmax;
@@ -19,7 +19,7 @@
 }
 
 .parallax--three {
-    top: 20%;
+    top: 60%;
     left: 55%;
     width: 10vmax;
     height: 15vmax;
@@ -27,7 +27,7 @@
 }
 
 .parallax--four {
-    top: 25%;
+    top: 85%;
     left: 42.5%;
     width: 10vmax;
     height: 10vmax;
