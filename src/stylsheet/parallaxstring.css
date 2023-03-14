@@ -1,0 +1,35 @@
+.parallax {
+    position: absolute;
+}
+
+.parallax--one {
+    top: 0;
+    left: 40%;
+    width: 10vmax;
+    height: 15vmax;
+    background-color: #622DFF;
+}
+
+.parallax--two {
+    top: 10%;
+    left: 45%;
+    width: 20vmax;
+    height: 10vmax;
+    background-color: #FFD813;
+}
+
+.parallax--three {
+    top: 20%;
+    left: 55%;
+    width: 10vmax;
+    height: 15vmax;
+    background-color: #FF7600;
+}
+
+.parallax--four {
+    top: 25%;
+    left: 42.5%;
+    width: 10vmax;
+    height: 10vmax;
+    background-color: #2C68FF;
+}

@@ -4,6 +4,7 @@ import Careers from "./routes/Careers";
 import Home from "./routes/Home";
 import Navbar from './component/Navbar';
 import Arrow from './routes/Arrow';
+import LetterShow from './routes/LetterShow';
 function App() {
   return (
     <>
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/arrow" element={<Arrow />} />
         <Route path="/careers" element={<Careers />} />
+        <Route path="/LetterShow" element={<LetterShow />} />
       </Routes>
     </>
   );

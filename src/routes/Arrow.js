@@ -29,9 +29,6 @@ const Arrow = () => {
 
     // //start new game
     function newGame() {
-        console.log('canvaObj.drawL')
-        console.log(canvaObj)
-        console.log('ssss')
         if (canvaObj.drawL.length)
             return
         nbTouch = 0;
@@ -42,7 +39,6 @@ const Arrow = () => {
 
     // //onclick do that
     function clickObject(event) {
-        console.log(canvaObj)
         if (!click) {
             startTime = Date.now();
         }
@@ -61,7 +57,6 @@ const Arrow = () => {
                 setScores([newScore])
 
         }
-        console.log(canvaObj)
     }
 
     function setCanva(canvas, ctx) {
