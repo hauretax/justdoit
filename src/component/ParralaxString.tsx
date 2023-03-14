@@ -14,7 +14,7 @@ interface MyState {
 
 function updateParallax(refs: RefObject<HTMLInputElement>[], x: number, y: number) {
     // Loop through each target element
-
+    // return
     refs.forEach(el => {
         //     // Get the target's speed
         let target = el.current
@@ -56,7 +56,6 @@ export default class ParralaxString extends React.Component<AppProps, MyState> {
     render() {
         const { inputRefs } = this.state;
         let { text } = this.props;
-
         let textarr = text.split('')
         return (
             <div className='ParralaxString'>
@@ -68,7 +67,7 @@ export default class ParralaxString extends React.Component<AppProps, MyState> {
                                 key={index}
                                 ref={inputRefs[index]}
                                 className="parallax"
-                                data-speed={Math.random()} >
+                                data-speed={Math.random() / 10} >
                                 {el}
                             </span>
                         return eltoprint
