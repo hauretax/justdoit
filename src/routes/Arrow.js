@@ -10,7 +10,7 @@ const Arrow = () => {
     const [scores, setScores] = useState(getLocal('scores'));
     let nbTouch = 0;
     let click = 0;
-    let nbCible = 50;
+    let nbCible = 25;
     let startTime;
     let canvaObj = null;
 
@@ -29,6 +29,9 @@ const Arrow = () => {
 
     // //start new game
     function newGame() {
+        console.log('canvaObj.drawL')
+        console.log(canvaObj)
+        console.log('ssss')
         if (canvaObj.drawL.length)
             return
         nbTouch = 0;
@@ -39,8 +42,7 @@ const Arrow = () => {
 
     // //onclick do that
     function clickObject(event) {
-
-        event.stopPropagation()
+        console.log(canvaObj)
         if (!click) {
             startTime = Date.now();
         }
@@ -57,24 +59,25 @@ const Arrow = () => {
                 setScores([...scores, newScore])
             else
                 setScores([newScore])
-            console.log(scores)
+
         }
+        console.log(canvaObj)
+    }
+
+    function setCanva(canvas, ctx) {
+        canvaObj = new Canvashandler(canvas, ctx)
     }
 
     function resetGame() {
         newGame();
     }
 
-    function setCanva(canvas, ctx) {
-        canvaObj = new Canvashandler(canvas, ctx)
-        newGame();
-    }
 
     return (
         <div>
 
             <div id='canvadiv'>
-                <DrawCanvas setCanva={setCanva} onClick={clickObject} />
+                <DrawCanvas setCanva={setCanva} newGame={newGame} onClick={clickObject} />
             </div>
             <div className="option">
                 <input onClick={resetGame} type="button" value='reset' className='greenButton' id="resetButton" />

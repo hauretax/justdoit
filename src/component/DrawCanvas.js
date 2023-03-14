@@ -6,10 +6,15 @@ export default class DrawCanvas extends React.Component {
         super(props);
         this.canvas = React.createRef();
     }
-
     componentDidMount() {
         this.props.setCanva(this.canvas.current, this.canvas.current.getContext('2d'));
+        this.props.newGame()
     }
+
+    componentDidUpdate() {
+        this.props.setCanva(this.canvas.current, this.canvas.current.getContext('2d'));
+    }
+
 
     render() {
         return (
