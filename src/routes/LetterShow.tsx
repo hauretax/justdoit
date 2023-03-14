@@ -24,6 +24,7 @@ export default function LetterShow() {
     return (
         <div id='lettershow' onMouseMove={handleMouseMove}>
             <ParralaxString text='ANANAS' x={x} y={y} />
+            {/* <input type='text' value={}/> */}
         </div>
     )
 }

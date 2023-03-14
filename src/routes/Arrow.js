@@ -70,7 +70,6 @@ const Arrow = () => {
 
     return (
         <div>
-
             <div id='canvadiv'>
                 <DrawCanvas setCanva={setCanva} newGame={newGame} onClick={clickObject} />
             </div>
