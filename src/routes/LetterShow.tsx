@@ -20,11 +20,16 @@ const useMove = () => {
 
 export default function LetterShow() {
     const { x, y, handleMouseMove } = useMove()
+    const [text, setText] = useState('aasdasdasd')
+
+    function textchange(event: any) {
+        setText(event.target.value)
+    }
 
     return (
         <div id='lettershow' onMouseMove={handleMouseMove}>
-            <ParralaxString text='ANANAS' x={x} y={y} />
-            {/* <input type='text' value={}/> */}
+            <ParralaxString text={text} x={x} y={y} />
+            <input type='text' value={text} onChange={textchange} />
         </div>
     )
 }

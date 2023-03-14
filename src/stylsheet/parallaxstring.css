@@ -1,5 +1,12 @@
 .parallax {
-    position: absolute;
+    position: relative
+        /* position: absolute;
     top: 40%;
-    left: 40%
+    left: 40% */
+}
+
+.parralaxstring {
+    /* position: absolute;
+    top: 50%;
+    left: 45%; */
 }
