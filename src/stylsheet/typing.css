@@ -1,0 +1,8 @@
+#typing {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 21px);
+    align-items: center;
+    justify-content: center;
+
+}

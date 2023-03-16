@@ -20,7 +20,7 @@ const useMove = () => {
 
 export default function LetterShow() {
     const { x, y, handleMouseMove } = useMove()
-    const [text, setText] = useState('aasdasdasd')
+    const [text, setText] = useState('')
 
     function textchange(event: any) {
         setText(event.target.value)
@@ -28,8 +28,8 @@ export default function LetterShow() {
 
     return (
         <div id='lettershow' onMouseMove={handleMouseMove}>
-            <ParralaxString text={text} x={x} y={y} />
             <input type='text' value={text} onChange={textchange} />
+            <ParralaxString text={text} x={x} y={y} />
         </div>
     )
 }

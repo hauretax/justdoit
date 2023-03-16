@@ -25,17 +25,18 @@ function updateParallax(refs: RefObject<HTMLInputElement>[], x: number, y: numbe
     refs.forEach(el => {
         //     // Get the target's speed
         let target = el.current
+        //don t use target if she dosn t existe
         if (!target) {
             return;
         }
-        const speed = parseFloat(target?.dataset.speed || "0");
+        const speed = parseFloat(target.dataset.speed || "0");
 
         // Calculate the new position based on the mouse position and speed
         const newx = (window.innerWidth / 2 - x) * speed;
         const newy = (window.innerHeight / 2 - y) * speed;
 
-        target!.style.top = newy + 'px'
-        target!.style.left = newx + 'px'
+        target.style.top = newy + 'px'
+        target.style.left = newx + 'px'
     });
 }
 

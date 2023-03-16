@@ -3,6 +3,7 @@
     height: calc(100% - 21px);
     background-color: antiquewhite;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
