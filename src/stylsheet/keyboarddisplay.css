@@ -1,5 +1,6 @@
 .keyboard-button {
     display: inline-block;
+    box-sizing: border-box;
     width: 50px;
     height: 50px;
     margin: 5px;
@@ -9,21 +10,25 @@
     transition: transform 0.1s ease-in-out;
 }
 
-.keyboard-button:hover {
+.inactive:hover {
     transform: translateY(-2px);
     box-shadow: 0px 5px 0px rgba(0, 0, 0, 0.2), 0px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.keyboard-button:active {
+/* .keyboard-button:active {
     transform: translateY(0px);
     box-shadow: none;
     background-image: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
-}
+} */
 
 .active {
     transform: translateY(0px);
     box-shadow: none;
     background-image: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+}
+
+.green {
+    border: greenyellow 2px solid;
 }
 
 .keyboard-letter {

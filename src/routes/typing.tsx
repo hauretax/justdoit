@@ -3,10 +3,11 @@ import KeyboardDisplay from '../component/KeyboardDisplay';
 import React, { useEffect, useState } from 'react';
 
 import '../stylsheet/typing.css'
+import TypingPlace from '../component/TypingPlace';
 
-const tab = [['.', 'j', 'h', 'o', 'u', '.', '.', 'g', 'c', 'r', 'f', '.'],
-['.', 'i', 'e', 'a', 'y', '.', '.', 'd', 's', 't', 'n', '.'],
-['.', 'k', 'z', 'v', 'x', 'q', 'b', 'w', 'm', 'l', 'p', '.']
+const tab = [['', 'j', 'h', 'o', 'u', '', '', 'g', 'c', 'r', 'f', ''],
+['', 'i', 'e', 'a', 'y', '', '', 'd', 's', 't', 'n', ''],
+['', 'k', 'z', 'v', 'x', 'q', 'b', 'w', 'm', 'l', 'p', '']
 ]
 
 
@@ -23,31 +24,63 @@ const generateCharacters = ({ characterSet, count }: Props): string => {
         const randomIndex = Math.floor(Math.random() * availableChars.length);
         result += availableChars[randomIndex];
     }
-    return result
+    let min = 0, max = count - 1
+    while (min < count && result[min] === ' ')
+        min++
+    while (max > 0 && result[max] === ' ')
+        max--;
+    return result.slice(min, max)
 };
 
 
 export default function Keyboard() {
-    const [chars, setChars] = useState(generateCharacters({ characterSet: ['a', 'b', 'c'], count: 8 }));
-    const [lastKeyPressed, setLastKeyPressed] = useState('');
+    const [chars, setChars] = useState<string[]>([])
+    const [startTime, setStart] = useState(0)
+    const [totaleTime, setTime] = useState(0)
+    const [tabChars, setTabChars] = useState('')
 
-    useEffect(() => {
-        function handleKeyDown(event: any) {
-            setLastKeyPressed(event.key);
-        }
 
-        window.addEventListener('keydown', handleKeyDown);
+    function toggleChar(char: string) {
+        const index = chars.indexOf(char)
+        //element non trouver
+        console.log(index, char, chars)
+        if (index === -1)
+            setChars([char, ...chars])
+        else
+            setChars(chars.filter((_, i) => {
+                if (i === index) return false
+                else return true
+            }))
 
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, []);
+    }
 
+    function startTimer() {
+        setStart(Date.now())
+    }
+
+    function endTimer() {
+        setTime(Date.now() - startTime)
+        setTabChars('')
+    }
+
+    function setupGame() {
+        console.log('ouvou')
+        setTabChars(generateCharacters({ characterSet: chars, count: 10 }))
+    }
+
+
+    if (tabChars)
+        return (
+            <div id='typing'>
+                <TypingPlace tabChars={tabChars} startTime={startTimer} stopTime={endTimer} />
+            </div>
+        )
 
     return (
         <div id='typing'>
-            <div>{chars}</div>
-            <KeyboardDisplay letters={tab} />
+            <KeyboardDisplay toggleChar={toggleChar} letters={tab} chars={chars} />
+            <div onClick={setupGame} className="entrer">generate</div>
+            <div >{totaleTime}</div>
         </div>
     );
 }

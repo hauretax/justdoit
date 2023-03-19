@@ -1,0 +1,41 @@
+.typingPlace {
+    font-size: 1.5rem;
+    max-width: 1000px;
+    word-wrap: break-word;
+    display: inherit;
+}
+
+.bad {
+    background-color: red;
+    color: white;
+    display: flex;
+}
+
+.good {
+    color: black;
+    background-color: white;
+}
+
+.neutral {
+    color: #D3D3D3;
+    background-color: white;
+    display: flex;
+}
+
+.cursor {
+    background-color: purple;
+    color: white;
+    height: 32px;
+    width: 2px;
+    animation: blink-animation 0.5s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+    from {
+        visibility: visible;
+    }
+
+    to {
+        visibility: hidden;
+    }
+}
