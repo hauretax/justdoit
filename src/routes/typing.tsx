@@ -1,7 +1,7 @@
 import KeyboardDisplay from '../component/KeyboardDisplay';
 
 import React, { useEffect, useState } from 'react';
-
+import { ChangeEvent } from "react"
 import '../stylsheet/typing.css'
 import TypingPlace from '../component/TypingPlace';
 
@@ -38,7 +38,7 @@ export default function Keyboard() {
     const [startTime, setStart] = useState(0)
     const [totaleTime, setTime] = useState(0)
     const [tabChars, setTabChars] = useState('')
-
+    const [nbletters, setNbLetters] = useState(10)
 
     function toggleChar(char: string) {
         const index = chars.indexOf(char)
@@ -65,7 +65,12 @@ export default function Keyboard() {
 
     function setupGame() {
         console.log('ouvou')
-        setTabChars(generateCharacters({ characterSet: chars, count: 10 }))
+        setTabChars(generateCharacters({ characterSet: chars, count: nbletters }))
+    }
+
+    function test(ev: any) {
+        console.log(ev.target)
+
     }
 
 
@@ -79,8 +84,18 @@ export default function Keyboard() {
     return (
         <div id='typing'>
             <KeyboardDisplay toggleChar={toggleChar} letters={tab} chars={chars} />
-            <div onClick={setupGame} className="entrer">generate</div>
-            <div >{totaleTime}</div>
+            <div className='mechanic'>
+                <form onChange={(ev: ChangeEvent<HTMLFormElement>) => {
+                    const target = ev.target as EventTarget & HTMLFormElement;
+                    setNbLetters(parseInt(target.value));
+                }}>
+                    <div><input type='radio' value='10' checked={10 === nbletters} />10</div>
+                    <div><input type='radio' value='50' checked={50 === nbletters} />50</div>
+                    <div><input type='radio' value='100' checked={100 === nbletters} />100</div>
+                    <div><input type='radio' value='1000' checked={1000 === nbletters} />1000</div>
+                </form>
+                <div onClick={setupGame} className="entrer">generate</div>
+            </div>
         </div>
     );
 }

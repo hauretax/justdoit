@@ -1,0 +1,53 @@
+.pile {
+    height: 50px;
+    width: 50px;
+    background-color: blueviolet;
+    z-index: 1;
+    position: fixed;
+    animation: 0.1s linear 0s infinite alternate turn1;
+    animation-play-state: paused;
+}
+
+.face {
+    height: 50px;
+    width: 50px;
+    background-color: green;
+    transform: rotateY(180deg);
+    z-index: 0;
+    animation: 0.1s linear 0s infinite alternate turn2;
+    animation-play-state: paused;
+}
+
+.pile:hover+.face,
+.pile:hover {
+    animation-play-state: running;
+}
+
+.face:hover+.pile,
+.face:hover {
+    animation-play-state: running;
+}
+
+@keyframes turn1 {
+    from {
+        transform: rotateY(0deg);
+        z-index: 1
+    }
+
+    to {
+        transform: rotateY(180deg);
+        z-index: 0
+    }
+}
+
+@keyframes turn2 {
+    from {
+        transform: rotateY(180deg);
+        z-index: 0
+    }
+
+    to {
+        transform: rotateY(360deg);
+        z-index: 1
+    }
+}
