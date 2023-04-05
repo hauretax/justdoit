@@ -1,6 +1,6 @@
 import KeyboardDisplay from '../component/KeyboardDisplay';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ChangeEvent } from "react"
 import '../stylsheet/typing.css'
 import TypingPlace from '../component/TypingPlace';
@@ -39,6 +39,7 @@ export default function Keyboard() {
     const [totaleTime, setTime] = useState(0)
     const [tabChars, setTabChars] = useState('')
     const [nbletters, setNbLetters] = useState(10)
+    const [missed, setmissed] = useState(0)
 
     function toggleChar(char: string) {
         const index = chars.indexOf(char)
@@ -60,24 +61,46 @@ export default function Keyboard() {
 
     function endTimer() {
         setTime(Date.now() - startTime)
+        setStart(0)
         setTabChars('')
     }
 
     function setupGame() {
-        console.log('ouvou')
+        setTime(0)
+        setmissed(0)
         setTabChars(generateCharacters({ characterSet: chars, count: nbletters }))
     }
 
-    function test(ev: any) {
-        console.log(ev.target)
 
+    function addOneMiss() {
+        setmissed(missed + 1)
     }
 
+    if (totaleTime) {
+        const time = new Date(totaleTime)
+        return (
+            <div id='score'>
+                <div>time {time.getMinutes()} : {time.getSeconds()}. {time.getMilliseconds()} </div>
+                <br />
+                <div>letters: {nbletters}</div>
+                <br />
+                <div>choose letters: {chars.map(el => <span>{el}</span>)}</div>
+                <br />
+                <div>miss: {missed}</div>
+                <br />
+                <div className='mechanic'>
+                    <div onClick={setupGame} className="entrer">retry</div>
+                    <div onClick={() => setTime(0)} className="entrer">change settings</div>
+                </div>
+            </div >
+        )
+    }
 
     if (tabChars)
         return (
             <div id='typing'>
-                <TypingPlace tabChars={tabChars} startTime={startTimer} stopTime={endTimer} />
+                <TypingPlace tabChars={tabChars} startTime={startTimer} stopTime={endTimer} missed={addOneMiss} />
+                <div onClick={endTimer} className="entrer">stop</div>
             </div>
         )
 

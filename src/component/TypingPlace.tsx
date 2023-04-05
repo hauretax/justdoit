@@ -4,10 +4,11 @@ type Props = {
     tabChars: string
     startTime: Function
     stopTime: Function
+    missed: Function
 }
 
 
-export default function TypingPlace({ tabChars, startTime, stopTime }: Props) {
+export default function TypingPlace({ tabChars, startTime, stopTime, missed }: Props) {
 
     const textArr = tabChars.split('')
     const refs = Array.from({ length: textArr.length }, () => React.createRef<HTMLInputElement>())
@@ -31,7 +32,7 @@ export default function TypingPlace({ tabChars, startTime, stopTime }: Props) {
                 if (i === tabChars.length - 1)
                     stopTime()
             }
-            else target.current!.className = 'bad'
+            else { target.current!.className = 'bad'; missed() }
             seti(prevI => prevI + 1);
         }
 

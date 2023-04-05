@@ -6,6 +6,7 @@ import Arrow from './routes/Arrow';
 import LetterShow from './routes/LetterShow';
 import Keyboard from './routes/typing';
 import ShowAnime from './routes/DemoAnimeTest';
+import Webtopdf from './routes/webtopdf';
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
         <Route path="/LetterShow" element={<LetterShow />} />
         <Route path="/Keyboard" element={<Keyboard />} />
         <Route path="/demo" element={<ShowAnime />} />
+        <Route path="/pdf" element={<Webtopdf />} />
       </Routes>
     </>
   );

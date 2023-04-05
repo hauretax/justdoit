@@ -1,8 +1,8 @@
 .typingPlace {
     font-size: 1.5rem;
     max-width: 1000px;
-    word-wrap: break-word;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .bad {
